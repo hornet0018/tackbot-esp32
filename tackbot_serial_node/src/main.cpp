@@ -147,7 +147,7 @@ void loop()
 
 void commandProcess(void)
 {
-  if (millis() - prevSendTime > 1000)
+  if (millis() - prevSendTime < 500)
   {
     prevSendTime = millis();
     if (abs(a1) > 0)
@@ -162,5 +162,8 @@ void commandProcess(void)
     {
       robotMove(0, 0);
     }
+  }
+  else{
+    robotMove(0, 0);
   }
 }
