@@ -147,9 +147,13 @@ void loop()
 
 void commandProcess(void)
 {
-  if (millis() - prevSendTime > 500)
+  int32_t clientSendTime = t;
+  // クライアントとの通信に関連した時間の処理
+  clientSendTimeDiff = clientSendTime - prevClientSendTime;
+  prevClientSendTime = clientSendTime;
+  receivedTime = millis();
+  if ((millis() - receivedTime) < 150)
   {
-    prevSendTime = millis();
     if (abs(a1) > 0)
     {
       robotMove(a1 * -255, a1 * 255);
@@ -162,8 +166,14 @@ void commandProcess(void)
     {
       robotMove(0, 0);
     }
+
+    if (millis() - prevSendTime > 500)
+    {
+      robotMove(0, 0);
+    }
   }
-  else{
+  else
+  {
     robotMove(0, 0);
   }
 }
