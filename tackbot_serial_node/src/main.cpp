@@ -141,6 +141,7 @@ void loop()
     a1 = root["axes1"];
     a2 = root["axes2"];
     t = root["time"];
+    commandProcess();
   }
 }
 
