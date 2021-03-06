@@ -30,11 +30,6 @@ float t = 0;
 float a1 = 0;
 float a2 = 0;
 
-int32_t receivedTime = 0; // こっちが受信したときの内部時間
-int32_t prevSendTime = 0; // こっちが受信したときの内部時間
-
-void commandProcess(DynamicJsonDocument commands);
-
 void task0(void *arg)
 {
   while (1)
@@ -137,15 +132,9 @@ void loop()
   {
     DynamicJsonDocument root(1024);
     deserializeJson(root, Serial);
-    commandProcess(root);
-  }
-}
-
-void commandProcess(DynamicJsonDocument root)
-{
-  a1 = root["axes1"];
-  a2 = root["axes2"];
-  t = root["time"];
+    a1 = root["axes1"];
+    a2 = root["axes2"];
+    t = root["time"];
     if (abs(a1) > 0)
     {
       robotMove(a1 * -255, a1 * 255);
@@ -158,4 +147,5 @@ void commandProcess(DynamicJsonDocument root)
     {
       robotMove(0, 0);
     }
+  }
 }
