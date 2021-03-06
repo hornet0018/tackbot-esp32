@@ -23,8 +23,14 @@ CRGB leds[NUM_LEDS];
 
 #define MAX_SPEED 255
 
+void commandProcess();
+
 int16_t speedR_data = 0;
 int16_t speedL_data = 0;
+int32_t clientSendTimeDiff = 0; // クライアントとの通信間隔
+int32_t prevClientSendTime = 0; // 前回クライアントと通信した時の時間
+int32_t receivedTime = 0;       // こっちが受信したときの内部時間
+int32_t prevSendTime = 0;       // こっちが受信したときの内部時間
 
 float t = 0;
 float a1 = 0;
@@ -135,17 +141,21 @@ void loop()
     a1 = root["axes1"];
     a2 = root["axes2"];
     t = root["time"];
-    if (abs(a1) > 0)
-    {
-      robotMove(a1 * -255, a1 * 255);
-    }
-    else if (abs(a2) > 0)
-    {
-      robotMove(a2 * 255, a2 * 255);
-    }
-    else
-    {
-      robotMove(0, 0);
-    }
+  }
+}
+
+void commandProcess(void)
+{
+  if (abs(a1) > 0)
+  {
+    robotMove(a1 * -255, a1 * 255);
+  }
+  else if (abs(a2) > 0)
+  {
+    robotMove(a2 * 255, a2 * 255);
+  }
+  else
+  {
+    robotMove(0, 0);
   }
 }
