@@ -166,11 +166,6 @@ void commandProcess(void)
     {
       robotMove(0, 0);
     }
-
-    if (millis() - prevSendTime > 500)
-    {
-      robotMove(0, 0);
-    }
   }
   else
   {
