@@ -152,7 +152,7 @@ void commandProcess(void)
   clientSendTimeDiff = clientSendTime - prevClientSendTime;
   prevClientSendTime = clientSendTime;
   receivedTime = millis();
-  if ((millis() - receivedTime) < 150)
+  if ((clientSendTimeDiff) < 150)
   {
     if (abs(a1) > 0)
     {
