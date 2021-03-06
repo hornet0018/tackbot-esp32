@@ -146,9 +146,6 @@ void commandProcess(DynamicJsonDocument root)
   a1 = root["axes1"];
   a2 = root["axes2"];
   t = root["time"];
-  if (millis() - prevSendTime > 1000)
-  {
-    prevSendTime = millis();
     if (abs(a1) > 0)
     {
       robotMove(a1 * -255, a1 * 255);
@@ -161,9 +158,4 @@ void commandProcess(DynamicJsonDocument root)
     {
       robotMove(0, 0);
     }
-  }
-  else
-  {
-     robotMove(0, 0);
-  }
 }
