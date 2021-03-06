@@ -147,7 +147,7 @@ void loop()
 
 void commandProcess(void)
 {
-  if (millis() - prevSendTime < 500)
+  if (millis() - prevSendTime > 500)
   {
     prevSendTime = millis();
     if (abs(a1) > 0)
