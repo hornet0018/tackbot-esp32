@@ -147,16 +147,20 @@ void loop()
 
 void commandProcess(void)
 {
-  if (abs(a1) > 0)
+  if (millis() - prevSendTime > 1000)
   {
-    robotMove(a1 * -255, a1 * 255);
-  }
-  else if (abs(a2) > 0)
-  {
-    robotMove(a2 * 255, a2 * 255);
-  }
-  else
-  {
-    robotMove(0, 0);
+    prevSendTime = millis();
+    if (abs(a1) > 0)
+    {
+      robotMove(a1 * -255, a1 * 255);
+    }
+    else if (abs(a2) > 0)
+    {
+      robotMove(a2 * 255, a2 * 255);
+    }
+    else
+    {
+      robotMove(0, 0);
+    }
   }
 }
