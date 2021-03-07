@@ -111,7 +111,7 @@ void setup()
   ledcAttachPin(M2B, M2B_PWM_CHANNEL);
 
   Serial.begin(115200);
-  Serial1.begin(115200, SERIAL_8N1, 32, 26);
+  Serial1.begin(115200, SERIAL_8N1, 26, 32);
   // create tasks
   xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
