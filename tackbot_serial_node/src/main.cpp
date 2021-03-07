@@ -143,10 +143,9 @@ void loop()
     t = root["time"];
     commandProcess();
   }
-  if (millis() - prevSendTime > 1000)
+  if (millis() - prevSendTime > 100)
   {
-    prevSendTime = millis();
-    Serial1.println("test1");
+    Serial1.println(clientSendTimeDiff);
   }
   delay(1);
 }
