@@ -142,6 +142,9 @@ void loop()
     a2 = root["axes2"];
     t = root["time"];
     commandProcess();
+    int32_t clientSendTime = t;
+    // クライアントとの通信に関連した時間の処理
+    clientSendTimeDiff =  millis() - clientSendTime;
   }
   if (millis() - prevSendTime > 200)
   {
@@ -153,24 +156,13 @@ void loop()
 
 void commandProcess(void)
 {
-  int32_t clientSendTime = t;
-  // クライアントとの通信に関連した時間の処理
-  clientSendTimeDiff = clientSendTime - prevClientSendTime;
-  prevClientSendTime = clientSendTime;
-  if ((clientSendTimeDiff) < 150)
+  if (abs(a1) > 0)
   {
-    if (abs(a1) > 0)
-    {
-      robotMove(a1 * -255, a1 * 255);
-    }
-    else if (abs(a2) > 0)
-    {
-      robotMove(a2 * 255, a2 * 255);
-    }
-    else
-    {
-      robotMove(0, 0);
-    }
+    robotMove(a1 * -255, a1 * 255);
+  }
+  else if (abs(a2) > 0)
+  {
+    robotMove(a2 * 255, a2 * 255);
   }
   else
   {
