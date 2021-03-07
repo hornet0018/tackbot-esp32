@@ -154,6 +154,7 @@ void loop()
   {
     connect = true;
   }
+  /*
   if (millis() - prevSendTime > 200)//degug message
   {
     prevSendTime = millis();
@@ -162,6 +163,7 @@ void loop()
     Serial1.println(clientSendTimeDiff);
   }
   delay(1);
+  */
 }
 
 void commandProcess(void)
