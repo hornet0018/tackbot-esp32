@@ -156,7 +156,6 @@ void loop()
 
 void commandProcess(void)
 {
-  /*
   if (abs(a1) > 0)
   {
     robotMove(a1 * -255, a1 * 255);
@@ -169,16 +168,4 @@ void commandProcess(void)
   {
     robotMove(0, 0);
   }
-  */
-  if(clientSendTimeDiff > 1000)
-  {
-    Serial1.println("disconnected");
-    delay(500);
-  }
-  else
-  {
-    Serial1.println("connected");
-    delay(500);
-  }
-
 }
