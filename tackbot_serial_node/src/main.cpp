@@ -145,6 +145,7 @@ void loop()
   }
   if (millis() - prevSendTime > 100)
   {
+    prevSendTime = millis();
     Serial1.println(clientSendTimeDiff);
   }
   delay(1);
