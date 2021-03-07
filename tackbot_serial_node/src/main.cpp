@@ -31,7 +31,7 @@ int32_t clientSendTimeDiff = 0; // クライアントとの通信間隔
 int32_t prevClientSendTime = 0; // 前回クライアントと通信した時の時間
 int32_t receivedTime = 0;       // こっちが受信したときの内部時間
 int32_t prevSendTime = 0;       // こっちが受信したときの内部時間
-int32_t startTime = 0;          // こっちが受信したときの内部時間
+int32_t startTime = 0;       // こっちが受信したときの内部時間
 
 float t = 0;
 float a1 = 0;
@@ -146,33 +146,39 @@ void loop()
     startTime = millis();
   }
   clientSendTimeDiff = millis() - startTime;
+  if (millis() - prevSendTime > 200)
+  {
+    prevSendTime = millis();
+    Serial1.println(clientSendTimeDiff);
+  }
+  delay(1);
 }
 
 void commandProcess(void)
 {
-  if (clientSendTimeDiff < 1000) //接続中
+  /*
+  if (abs(a1) > 0)
   {
-    if (abs(a1) > 0)
-    {
-      robotMove(a1 * -255, a1 * 255);
-    }
-    else if (abs(a2) > 0)
-    {
-      robotMove(a2 * 255, a2 * 255);
-    }
-    else
-    {
-      robotMove(0, 0);
-    }
+    robotMove(a1 * -255, a1 * 255);
   }
-  else //切断中
+  else if (abs(a2) > 0)
+  {
+    robotMove(a2 * 255, a2 * 255);
+  }
+  else
   {
     robotMove(0, 0);
-    if (millis() - prevSendTime > 1000)
-    {
-      prevSendTime = millis();
-      Serial1.println("disconnected");
-    }
-    delay(1);
   }
+  */
+  if(clientSendTimeDiff > 1000)
+  {
+    Serial1.println("disconnected");
+    delay(500);
+  }
+  else
+  {
+    Serial1.println("connected");
+    delay(500);
+  }
+
 }
