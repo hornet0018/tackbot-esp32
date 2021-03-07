@@ -135,19 +135,19 @@ void setup()
 
 void loop()
 {
+  receivedTime = millis();
   while (Serial.available())
   {
-    receivedTime = millis();
     DynamicJsonDocument root(1024);
     deserializeJson(root, Serial);
     a1 = root["axes1"];
     a2 = root["axes2"];
     t = root["time"];
     commandProcess();
-    if((millis() - receivedTime) > 1000)
-    {
-      Serial1.println("test");
-    }
+  }
+  if ((millis() - receivedTime) > 1000)
+  {
+    Serial1.println("test");
   }
 }
 
