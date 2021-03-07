@@ -148,6 +148,7 @@ void loop()
     prevSendTime = millis();
     Serial1.println("test1");
   }
+  delay(1);
 }
 
 void commandProcess(void)
