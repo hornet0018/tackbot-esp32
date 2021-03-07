@@ -143,7 +143,7 @@ void loop()
     t = root["time"];
     commandProcess();
   }
-  if (millis() - prevSendTime > 100)
+  if (millis() - prevSendTime > 200)
   {
     prevSendTime = millis();
     Serial1.println(clientSendTimeDiff);
