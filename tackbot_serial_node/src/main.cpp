@@ -143,8 +143,12 @@ void loop()
     t = root["time"];
     commandProcess();
   }
-  Serial1.println("test1");
-  delay(500);
+  if (millis() - prevSendTime > 1000)
+  {
+    prevSendTime = millis();
+    Serial1.println("test1");
+  }
+  delay(1);
 }
 
 void commandProcess(void)
