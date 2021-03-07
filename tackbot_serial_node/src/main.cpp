@@ -100,7 +100,6 @@ void robotMove(int speedLeft, int speedRight)
 
 void setup()
 {
-
   ledcSetup(M1A_PWM_CHANNEL, PWM_FREQUENCY, PWM_RESOLUTION);
   ledcSetup(M1B_PWM_CHANNEL, PWM_FREQUENCY, PWM_RESOLUTION);
   ledcSetup(M2A_PWM_CHANNEL, PWM_FREQUENCY, PWM_RESOLUTION);
@@ -135,7 +134,8 @@ void setup()
 
 void loop()
 {
-  receivedTime = millis();
+  Serial1.println("test");
+  delay(1000);
   while (Serial.available())
   {
     DynamicJsonDocument root(1024);
@@ -144,10 +144,6 @@ void loop()
     a2 = root["axes2"];
     t = root["time"];
     commandProcess();
-  }
-  if ((millis() - receivedTime) > 1000)
-  {
-    Serial1.println("test");
   }
 }
 
