@@ -32,7 +32,7 @@ int32_t prevClientSendTime = 0; // 前回クライアントと通信した時の
 int32_t receivedTime = 0;       // こっちが受信したときの内部時間
 int32_t prevSendTime = 0;       // こっちが受信したときの内部時間
 int32_t startTime = 0;       // こっちが受信したときの内部時間
-
+bool connect = false;
 float t = 0;
 float a1 = 0;
 float a2 = 0;
@@ -146,9 +146,18 @@ void loop()
     startTime = millis();
   }
   clientSendTimeDiff = millis() - startTime;
+  if(clientSendTimeDiff > 500)
+  {
+    connect = false;
+  }
+  else
+  {
+    connect = true;
+  }
   if (millis() - prevSendTime > 200)
   {
     prevSendTime = millis();
+    Serial1.print(connect);
     Serial1.println(clientSendTimeDiff);
   }
   delay(1);
