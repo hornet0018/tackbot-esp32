@@ -134,6 +134,8 @@ void setup()
 
 void loop()
 {
+  int32_t clientSendTime = t;
+  clientSendTimeDiff = millis() - clientSendTime;
   while (Serial.available())
   {
     DynamicJsonDocument root(1024);
@@ -142,9 +144,6 @@ void loop()
     a2 = root["axes2"];
     t = root["time"];
     commandProcess();
-    int32_t clientSendTime = t;
-    // クライアントとの通信に関連した時間の処理
-    clientSendTimeDiff =  millis() - clientSendTime;
   }
   if (millis() - prevSendTime > 200)
   {
