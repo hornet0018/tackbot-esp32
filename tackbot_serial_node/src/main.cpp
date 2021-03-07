@@ -31,6 +31,7 @@ int32_t clientSendTimeDiff = 0; // クライアントとの通信間隔
 int32_t prevClientSendTime = 0; // 前回クライアントと通信した時の時間
 int32_t receivedTime = 0;       // こっちが受信したときの内部時間
 int32_t prevSendTime = 0;       // こっちが受信したときの内部時間
+int32_t startTime = 0;       // こっちが受信したときの内部時間
 
 float t = 0;
 float a1 = 0;
@@ -142,9 +143,9 @@ void loop()
     a2 = root["axes2"];
     t = root["time"];
     commandProcess();
+    startTime = millis();
   }
-  int32_t clientSendTime = t;
-  clientSendTimeDiff = millis() - clientSendTime;
+  clientSendTimeDiff = millis() - startTime;
   if (millis() - prevSendTime > 200)
   {
     prevSendTime = millis();
